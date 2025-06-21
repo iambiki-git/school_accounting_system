@@ -163,41 +163,48 @@
             </div>
         </div>
 
-        <!-- Add Student Modal -->
-        <div class="fixed z-50 inset-0 overflow-y-auto hidden" id="addStudentModal">
-            <div class="flex items-center justify-center min-h-screen p-4">
-                <!-- Overlay -->
-                <div class="fixed inset-0 bg-gray-900 bg-opacity-75 transition-opacity backdrop-blur-sm" aria-hidden="true"></div>
-                
-                <!-- Modal container -->
-                <div class="relative bg-white rounded-xl shadow-2xl overflow-hidden transform transition-all sm:max-w-lg w-full">
-                    <!-- Header with gradient background -->
-                    <div class="bg-gradient-to-r from-blue-500 to-blue-600 px-6 py-4">
-                        <div class="flex items-center">
-                            <div class="flex-shrink-0 bg-white bg-opacity-20 p-2 rounded-lg">
-                                <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                                </svg>
-                            </div>
-                            <div class="ml-3">
-                                <h3 class="text-lg font-semibold text-white" id="modal-title">Add New Student</h3>
-                                <p class="text-sm text-blue-100">Fill in the student details below</p>
-                            </div>
+    <!-- Add Student Modal -->
+    <div class="fixed z-50 inset-0 overflow-y-auto hidden" id="addStudentModal">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <!-- Overlay -->
+            <div class="fixed inset-0 bg-gray-900 bg-opacity-75 transition-opacity backdrop-blur-sm" aria-hidden="true"></div>
+            
+            <!-- Modal container -->
+            <div class="relative bg-white rounded-xl shadow-2xl overflow-hidden transform transition-all sm:max-w-2xl w-full max-h-[90vh] flex flex-col">
+                <!-- Header with gradient background -->
+                <div class="bg-gradient-to-r from-blue-500 to-blue-600 px-6 py-4">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0 bg-white bg-opacity-20 p-2 rounded-lg">
+                            <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                            </svg>
+                        </div>
+                        <div class="ml-3">
+                            <h3 class="text-lg font-semibold text-white" id="modal-title">Add New Student</h3>
+                            <p class="text-sm text-blue-100">Fill in all required student details</p>
                         </div>
                     </div>
-                    
-                    <!-- Modal body -->
-                    <div class="px-6 py-5 space-y-6">
-                        <form id="studentForm" method="POST" action="{% url 'add_student' %}">
-                            {% csrf_token %}
-                            <div class="space-y-5">
-                                <!-- Name fields -->
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                </div>
+                
+                <!-- Scrollable modal body -->
+                <div class="px-6 py-5 space-y-6 overflow-y-auto flex-1">
+                    <form id="studentForm" method="POST" action="{% url 'add_student' %}">
+                        {% csrf_token %}
+                        <div class="space-y-5">
+                            <!-- Personal Information Section -->
+                            <div class="border-b border-gray-200 pb-4">
+                                <h4 class="text-md font-medium text-gray-700 mb-3">Personal Information</h4>
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                                     <div class="space-y-1">
                                         <label for="first-name" class="block text-sm font-medium text-gray-700">First Name *</label>
                                         <input type="text" id="first-name" name="first_name" 
                                             class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm py-2 px-3 border transition-all duration-200 hover:border-blue-300"
                                             required>
+                                    </div>
+                                    <div class="space-y-1">
+                                        <label for="middle-name" class="block text-sm font-medium text-gray-700">Middle Name</label>
+                                        <input type="text" id="middle-name" name="middle_name" 
+                                            class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm py-2 px-3 border transition-all duration-200 hover:border-blue-300">
                                     </div>
                                     <div class="space-y-1">
                                         <label for="last-name" class="block text-sm font-medium text-gray-700">Last Name *</label>
@@ -207,49 +214,328 @@
                                     </div>
                                 </div>
                                 
-                                <!-- Class dropdown -->
-                                <div class="space-y-1">
-                                    <label for="class" class="block text-sm font-medium text-gray-700">Class *</label>
-                                    <select id="class" name="class" 
-                                            class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm py-2 px-3 border transition-all duration-200 hover:border-blue-300 appearance-none bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiAjd2VhZHRoZXItNzAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBvbHlsaW5lIHBvaW50cz0iNiA5IDEyIDE1IDE4IDkiPjwvcG9seWxpbmU+PC9zdmc+')] bg-no-repeat bg-right-2 bg-origin-content pr-8"
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+                                    <div class="space-y-1">
+                                        <label for="dob" class="block text-sm font-medium text-gray-700">Date of Birth *</label>
+                                        <input type="date" id="dob" name="dob" 
+                                            class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm py-2 px-3 border transition-all duration-200 hover:border-blue-300"
                                             required>
-                                        <option value="">Select class</option>
-                                        <option>Grade 1</option>
-                                        <option>Grade 2</option>
-                                        <option>Grade 3</option>
-                                    </select>
+                                    </div>
+                                    <div class="space-y-1">
+                                        <label for="gender" class="block text-sm font-medium text-gray-700">Gender *</label>
+                                        <select id="gender" name="gender" 
+                                                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm py-2 px-3 border transition-all duration-200 hover:border-blue-300 appearance-none bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiAjd2VhZHRoZXItNzAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBvbHlsaW5lIHBvaW50cz0iNiA5IDEyIDE1IDE4IDkiPjwvcG9seWxpbmU+PC9zdmc+')] bg-no-repeat bg-right-2 bg-origin-content pr-8"
+                                                required>
+                                            <option value="">Select gender</option>
+                                            <option value="M">Male</option>
+                                            <option value="F">Female</option>
+                                            <option value="O">Other</option>
+                                        </select>
+                                    </div>
+                                    <div class="space-y-1">
+                                        <label for="religion" class="block text-sm font-medium text-gray-700">Religion</label>
+                                        <select id="religion" name="religion" 
+                                                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm py-2 px-3 border transition-all duration-200 hover:border-blue-300 appearance-none bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiAjd2VhZHRoZXItNzAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBvbHlsaW5lIHBvaW50cz0iNiA5IDEyIDE1IDE4IDkiPjwvcG9seWxpbmU+PC9zdmc+')] bg-no-repeat bg-right-2 bg-origin-content pr-8">
+                                            <option value="">Select religion</option>
+                                            <option value="HINDU">Hindu</option>
+                                            <option value="BUDDHIST">Buddhist</option>
+                                            <option value="MUSLIM">Muslim</option>
+                                            <option value="CHRISTIAN">Christian</option>
+                                            <option value="OTHER">Other</option>
+                                        </select>
+                                    </div>
                                 </div>
                                 
-                                <!-- Parent phone -->
-                                <div class="space-y-1">
-                                    <label for="father-phone" class="block text-sm font-medium text-gray-700">Parent Phone *</label>
-                                    <div class="relative rounded-md shadow-sm">
-                                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                            <span class="text-gray-500 sm:text-sm">+977</span>
-                                        </div>
-                                        <input type="tel" name="phn_number" id="father-phone" 
-                                            class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm py-2 px-3 pl-12 border transition-all duration-200 hover:border-blue-300"
+                                <div class="space-y-1 mt-4">
+                                    <label for="blood-group" class="block text-sm font-medium text-gray-700">Blood Group</label>
+                                    <select id="blood-group" name="blood_group" 
+                                            class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm py-2 px-3 border transition-all duration-200 hover:border-blue-300 appearance-none bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiAjd2VhZHRoZXItNzAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBvbHlsaW5lIHBvaW50cz0iNiA5IDEyIDE1IDE4IDkiPjwvcG9seWxpbmU+PC9zdmc+')] bg-no-repeat bg-right-2 bg-origin-content pr-8">
+                                        <option value="">Select blood group</option>
+                                        <option value="A+">A+</option>
+                                        <option value="A-">A-</option>
+                                        <option value="B+">B+</option>
+                                        <option value="B-">B-</option>
+                                        <option value="AB+">AB+</option>
+                                        <option value="AB-">AB-</option>
+                                        <option value="O+">O+</option>
+                                        <option value="O-">O-</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <!-- Academic Information Section -->
+                            <div class="border-b border-gray-200 pb-4">
+                                <h4 class="text-md font-medium text-gray-700 mb-3">Academic Information</h4>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div class="space-y-1">
+                                        <label for="class-level" class="block text-sm font-medium text-gray-700">Class *</label>
+                                        <select id="class-level" name="class_level" 
+                                                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm py-2 px-3 border transition-all duration-200 hover:border-blue-300 appearance-none bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiAjd2VhZHRoZXItNzAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBvbHlsaW5lIHBvaW50cz0iNiA5IDEyIDE1IDE4IDkiPjwvcG9seWxpbmU+PC9zdmc+')] bg-no-repeat bg-right-2 bg-origin-content pr-8"
+                                                required>
+                                            <option value="">Select class</option>
+                                            <option>Grade 1</option>
+                                            <option>Grade 2</option>
+                                            <option>Grade 3</option>
+                                            <option>Grade 4</option>
+                                            <option>Grade 5</option>
+                                            <option>Grade 6</option>
+                                            <option>Grade 7</option>
+                                            <option>Grade 8</option>
+                                            <option>Grade 9</option>
+                                            <option>Grade 10</option>
+                                        </select>
+                                    </div>
+                                    <div class="space-y-1">
+                                        <label for="roll-number" class="block text-sm font-medium text-gray-700">Roll Number *</label>
+                                        <input type="text" id="roll-number" name="roll_number" 
+                                            class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm py-2 px-3 border transition-all duration-200 hover:border-blue-300"
                                             required>
                                     </div>
                                 </div>
+                                
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                                    <div class="space-y-1">
+                                        <label for="section" class="block text-sm font-medium text-gray-700">Section</label>
+                                        <select id="section" name="section" 
+                                                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm py-2 px-3 border transition-all duration-200 hover:border-blue-300 appearance-none bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI24IiBmaWxsPSJub25lIiBzdHJva2U9IiAjd2VhZHRoZXItNzAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBvbHlsaW5lIHBvaW50cz0iNiA5IDEyIDE1IDE4IDkiPjwvcG9seWxpbmU+PC9zdmc+')] bg-no-repeat bg-right-2 bg-origin-content pr-8">
+                                            <option value="">Select section</option>
+                                            <option>A</option>
+                                            <option>B</option>
+                                            <option>C</option>
+                                            <option>D</option>
+                                        </select>
+                                    </div>
+                                    <div class="space-y-1">
+                                        <label for="admission-date" class="block text-sm font-medium text-gray-700">Admission Date *</label>
+                                        <input type="date" id="admission-date" name="admission_date" 
+                                            class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm py-2 px-3 border transition-all duration-200 hover:border-blue-300"
+                                            required>
+                                    </div>
+                                </div>
+                                
+                                <div class="space-y-1 mt-4">
+                                    <label for="status" class="block text-sm font-medium text-gray-700">Status *</label>
+                                    <select id="status" name="status" 
+                                            class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm py-2 px-3 border transition-all duration-200 hover:border-blue-300 appearance-none bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiAjd2VhZHRoZXItNzAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBvbHlsaW5lIHBvaW50cz0iNiA5IDEyIDE1IDE4IDkiPjwvcG9seWxpbmU+PC9zdmc+')] bg-no-repeat bg-right-2 bg-origin-content pr-8"
+                                            required>
+                                        <option value="ACTIVE">Active</option>
+                                        <option value="INACTIVE">Inactive</option>
+                                        <option value="ALUMNI">Alumni</option>
+                                    </select>
+                                </div>
                             </div>
-                        </form>
-                    </div>
-                    
-                    <!-- Footer with action buttons -->
-                    <div class="bg-gray-50 px-6 py-4 flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-3">
-                        <button type="button" id="cancelAddStudent" 
-                                class="mt-3 sm:mt-0 inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-200 hover:shadow">
-                            Cancel
-                        </button>
-                        <button type="button" id="saveStudent" 
-                                class="inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-600 text-sm font-medium text-white hover:from-blue-600 hover:to-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-200 hover:shadow-lg">
-                            Save Student
-                        </button>
-                    </div>
+                            
+                            <!-- Contact Information Section -->
+                            <div class="border-b border-gray-200 pb-4">
+                                <h4 class="text-md font-medium text-gray-700 mb-3">Contact Information</h4>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div class="space-y-1">
+                                        <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                                        <input type="email" id="email" name="email" 
+                                            class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm py-2 px-3 border transition-all duration-200 hover:border-blue-300">
+                                    </div>
+                                    <div class="space-y-1">
+                                        <label for="phone" class="block text-sm font-medium text-gray-700">Phone</label>
+                                        <div class="relative rounded-md shadow-sm">
+                                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                                <span class="text-gray-500 sm:text-sm">+977</span>
+                                            </div>
+                                            <input type="tel" id="phone" name="phone" 
+                                                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm py-2 px-3 pl-12 border transition-all duration-200 hover:border-blue-300">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Medical Information Section -->
+                            <div class="border-b border-gray-200 pb-4">
+                                <h4 class="text-md font-medium text-gray-700 mb-3">Medical Information</h4>
+                                <div class="space-y-1">
+                                    <label for="medical-conditions" class="block text-sm font-medium text-gray-700">Medical Conditions</label>
+                                    <textarea id="medical-conditions" name="medical_conditions" rows="3"
+                                        class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm py-2 px-3 border transition-all duration-200 hover:border-blue-300"></textarea>
+                                </div>
+                                <div class="space-y-1 mt-4">
+                                    <label for="allergies" class="block text-sm font-medium text-gray-700">Allergies</label>
+                                    <textarea id="allergies" name="allergies" rows="3"
+                                        class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm py-2 px-3 border transition-all duration-200 hover:border-blue-300"></textarea>
+                                </div>
+                            </div>
+                            
+                            <!-- Parent Information Section -->
+                            <div class="border-b border-gray-200 pb-4">
+                                <h4 class="text-md font-medium text-gray-700 mb-3">Parent Information</h4>
+                                
+                                <!-- Father's Information -->
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div class="space-y-1">
+                                        <label for="father-name" class="block text-sm font-medium text-gray-700">Father's Name *</label>
+                                        <input type="text" id="father-name" name="father_name" 
+                                            class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm py-2 px-3 border transition-all duration-200 hover:border-blue-300"
+                                            required>
+                                    </div>
+                                    <div class="space-y-1">
+                                        <label for="father-occupation" class="block text-sm font-medium text-gray-700">Occupation</label>
+                                        <input type="text" id="father-occupation" name="father_occupation" 
+                                            class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm py-2 px-3 border transition-all duration-200 hover:border-blue-300">
+                                    </div>
+                                </div>
+                                
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                                    <div class="space-y-1">
+                                        <label for="father-phone" class="block text-sm font-medium text-gray-700">Phone *</label>
+                                        <div class="relative rounded-md shadow-sm">
+                                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                                <span class="text-gray-500 sm:text-sm">+977</span>
+                                            </div>
+                                            <input type="tel" id="father-phone" name="father_phone" 
+                                                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm py-2 px-3 pl-12 border transition-all duration-200 hover:border-blue-300"
+                                                required>
+                                        </div>
+                                    </div>
+                                    <div class="space-y-1">
+                                        <label for="father-email" class="block text-sm font-medium text-gray-700">Email</label>
+                                        <input type="email" id="father-email" name="father_email" 
+                                            class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm py-2 px-3 border transition-all duration-200 hover:border-blue-300">
+                                    </div>
+                                </div>
+                                
+                                <!-- Mother's Information -->
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                                    <div class="space-y-1">
+                                        <label for="mother-name" class="block text-sm font-medium text-gray-700">Mother's Name *</label>
+                                        <input type="text" id="mother-name" name="mother_name" 
+                                            class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm py-2 px-3 border transition-all duration-200 hover:border-blue-300"
+                                            required>
+                                    </div>
+                                    <div class="space-y-1">
+                                        <label for="mother-occupation" class="block text-sm font-medium text-gray-700">Occupation</label>
+                                        <input type="text" id="mother-occupation" name="mother_occupation" 
+                                            class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm py-2 px-3 border transition-all duration-200 hover:border-blue-300">
+                                    </div>
+                                </div>
+                                
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                                    <div class="space-y-1">
+                                        <label for="mother-phone" class="block text-sm font-medium text-gray-700">Phone</label>
+                                        <div class="relative rounded-md shadow-sm">
+                                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                                <span class="text-gray-500 sm:text-sm">+977</span>
+                                            </div>
+                                            <input type="tel" id="mother-phone" name="mother_phone" 
+                                                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm py-2 px-3 pl-12 border transition-all duration-200 hover:border-blue-300">
+                                        </div>
+                                    </div>
+                                    <div class="space-y-1">
+                                        <label for="mother-email" class="block text-sm font-medium text-gray-700">Email</label>
+                                        <input type="email" id="mother-email" name="mother_email" 
+                                            class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm py-2 px-3 border transition-all duration-200 hover:border-blue-300">
+                                    </div>
+                                </div>
+                                
+                                <!-- Guardian Information -->
+                                <div class="mt-4">
+                                    <label class="inline-flex items-center">
+                                        <input type="checkbox" id="has-guardian" name="has_guardian" class="rounded border-gray-300 text-blue-600 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+                                        <span class="ml-2 text-sm text-gray-700">Add Guardian Information</span>
+                                    </label>
+                                    
+                                    <div id="guardian-fields" class="hidden mt-4 space-y-4">
+                                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                            <div class="space-y-1">
+                                                <label for="guardian-name" class="block text-sm font-medium text-gray-700">Guardian's Name</label>
+                                                <input type="text" id="guardian-name" name="guardian_name" 
+                                                    class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm py-2 px-3 border transition-all duration-200 hover:border-blue-300">
+                                            </div>
+                                            <div class="space-y-1">
+                                                <label for="guardian-relation" class="block text-sm font-medium text-gray-700">Relation</label>
+                                                <input type="text" id="guardian-relation" name="guardian_relation" 
+                                                    class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm py-2 px-3 border transition-all duration-200 hover:border-blue-300">
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                            <div class="space-y-1">
+                                                <label for="guardian-phone" class="block text-sm font-medium text-gray-700">Phone</label>
+                                                <div class="relative rounded-md shadow-sm">
+                                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                                        <span class="text-gray-500 sm:text-sm">+977</span>
+                                                    </div>
+                                                    <input type="tel" id="guardian-phone" name="guardian_phone" 
+                                                        class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm py-2 px-3 pl-12 border transition-all duration-200 hover:border-blue-300">
+                                                </div>
+                                            </div>
+                                            <div class="space-y-1">
+                                                <label for="guardian-email" class="block text-sm font-medium text-gray-700">Email</label>
+                                                <input type="email" id="guardian-email" name="guardian_email" 
+                                                    class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm py-2 px-3 border transition-all duration-200 hover:border-blue-300">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Address Information Section -->
+                            <div>
+                                <h4 class="text-md font-medium text-gray-700 mb-3">Address Information</h4>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div class="space-y-1">
+                                        <label for="street" class="block text-sm font-medium text-gray-700">Street *</label>
+                                        <input type="text" id="street" name="street" 
+                                            class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm py-2 px-3 border transition-all duration-200 hover:border-blue-300"
+                                            required>
+                                    </div>
+                                    <div class="space-y-1">
+                                        <label for="city" class="block text-sm font-medium text-gray-700">City *</label>
+                                        <input type="text" id="city" name="city" 
+                                            class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm py-2 px-3 border transition-all duration-200 hover:border-blue-300"
+                                            required>
+                                    </div>
+                                </div>
+                                
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                                    <div class="space-y-1">
+                                        <label for="state" class="block text-sm font-medium text-gray-700">State *</label>
+                                        <input type="text" id="state" name="state" 
+                                            class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm py-2 px-3 border transition-all duration-200 hover:border-blue-300"
+                                            required>
+                                    </div>
+                                    <div class="space-y-1">
+                                        <label for="postal-code" class="block text-sm font-medium text-gray-700">Postal Code *</label>
+                                        <input type="text" id="postal-code" name="postal_code" 
+                                            class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm py-2 px-3 border transition-all duration-200 hover:border-blue-300"
+                                            required>
+                                    </div>
+                                </div>
+                                
+                                <div class="space-y-1 mt-4">
+                                    <label for="country" class="block text-sm font-medium text-gray-700">Country</label>
+                                    <input type="text" id="country" name="country" value="Nepal"
+                                        class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm py-2 px-3 border transition-all duration-200 hover:border-blue-300">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                
+                <!-- Footer with action buttons -->
+                <div class="bg-gray-50 px-6 py-4 flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-3">
+                    <button type="button" id="cancelAddStudent" 
+                            class="mt-3 sm:mt-0 inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-200 hover:shadow">
+                        Cancel
+                    </button>
+                    <button type="button" id="saveStudent" 
+                            class="inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-600 text-sm font-medium text-white hover:from-blue-600 hover:to-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-200 hover:shadow-lg">
+                        Save Student
+                    </button>
                 </div>
             </div>
-        </div> 
+        </div>
+    </div>
+
+
+
+
         
 
     </main>
@@ -328,6 +614,10 @@
                 setTimeout(() => notification.remove(), 300);
             }, 3000);
         }
+    });
+
+    document.getElementById('has-guardian').addEventListener('change', function() {
+        document.getElementById('guardian-fields').classList.toggle('hidden', !this.checked);
     });
 </script>
 
